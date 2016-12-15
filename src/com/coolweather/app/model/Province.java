@@ -6,7 +6,6 @@ public class Province {
 	private String provinceName;
 	private String provinceCode;
 	
-	//id
 	public int getId() {
 		return id;
 	}
@@ -15,7 +14,6 @@ public class Province {
 		this.id = id;
 	}
 	
-	//provinceName
 	public String getProvinceName() {
 		return provinceName;
 	}
@@ -24,7 +22,6 @@ public class Province {
 		this.provinceName = provinceName;
 	}
 	
-	//provinceCode
 	public String getProvinceCode() {
 		return provinceCode;
 	}

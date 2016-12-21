@@ -5,6 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="China">中国</string>
     <string name="load_lost">加载失败</string>
-    <string name="loading">正在加载...</string>
+    <string name="loading">正在加载…</string>
+    <string name="to">~</string>
+    <string name="syncing">同步中…</string>
+    <string name="sync_lost">同步失败</string>
 
 </resources>

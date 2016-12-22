@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * 后台每8小时更新一次
@@ -30,6 +31,7 @@ public class AutoUpdateService extends Service {
 			@Override
 			public void run() {
 				updateWeather();
+				Log.d("service", "天气更新");
 			}
 			
 		}).start();
@@ -50,7 +52,7 @@ public class AutoUpdateService extends Service {
 		String weatherCode = prefs.getString("weather_code", "");
 		String address = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + 
 				".html";
-		String type = "";
+		String type = "weatherCode";
 		HttpUtil.sendHttpRequest(address, type, new HttpCallbackListener() {
 
 			@Override

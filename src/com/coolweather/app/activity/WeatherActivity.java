@@ -1,6 +1,7 @@
 package com.coolweather.app.activity;
 
 import com.coolweather.app.R;
+import com.coolweather.app.service.AutoUpdateService;
 import com.coolweather.app.util.HttpCallbackListener;
 import com.coolweather.app.util.HttpUtil;
 import com.coolweather.app.util.Utility;
@@ -119,7 +120,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 			SharedPreferences prefs = PreferenceManager.
 					getDefaultSharedPreferences(this);
 			//从SharedPreferences文件中读取天气代号
-			String weatherCode = prefs.getString("weatherCode", "");
+			String weatherCode = prefs.getString("weather_code", "");
 			//读取的代号不为空的话，重新查询天气
 			if (!TextUtils.isEmpty(weatherCode)) {
 				queryWeatherInfo(weatherCode);
@@ -194,7 +195,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	}
 
 	/**
-	 * 从SharedPreferences文件中读取存储的天气信息，并显示到界面上
+	 * 从SharedPreferences文件中读取存储的天气信息，并显示到界面上,并启动后台更新天气的服务
 	 */
 	private void showWeather() {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -207,5 +208,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		//读取成功数据后再显示隐藏的布局和view
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
+		
+		Intent intent = new Intent(this, AutoUpdateService.class);
+		startService(intent);
 	}
 }

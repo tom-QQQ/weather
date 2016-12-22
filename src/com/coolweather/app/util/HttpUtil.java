@@ -15,6 +15,12 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtil {
 
+	/**
+	 * 针对地址不同的返回值类型，进行不同的解析方法
+	 * @param address  解析地址
+	 * @param type  地址类型，类型为"weatherCode"时，解析方法为json，其他的均用普通解析方法
+	 * @param listener  回调方法
+	 */
 	public static void sendHttpRequest(final String address, final String type,
 			final HttpCallbackListener listener) {
 		new Thread (new Runnable() {

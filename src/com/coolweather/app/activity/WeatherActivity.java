@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -64,6 +66,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	 */
 	private Button refreshWeather;
 	
+	protected static int onlyOne = 0;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,6 +105,28 @@ public class WeatherActivity extends Activity implements OnClickListener{
 			//没有县级代号时就直接显示本地天气
 			showWeather();
 		}
+	}
+	
+	/**
+	 * 创建菜单
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	/**
+	 * 定义菜单相应事件
+	 */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		//跳转至天气更新频率活动
+		case R.id.action_settings:
+			Intent intent = new Intent(this, UpdateFrequencyActivity.class);
+			startActivity(intent);
+		}
+		return true;
 	}
 	
 	@Override

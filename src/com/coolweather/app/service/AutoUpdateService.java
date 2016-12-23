@@ -7,6 +7,7 @@ import com.coolweather.app.util.Utility;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
@@ -14,10 +15,10 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-/**
- * 后台每8小时更新一次
- */
+
 public class AutoUpdateService extends Service {
+	
+	private SharedPreferences pref;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -31,16 +32,22 @@ public class AutoUpdateService extends Service {
 			@Override
 			public void run() {
 				updateWeather();
-				Log.d("service", "天气更新");
 			}
 			
 		}).start();
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		int eightHour = 8 * 60 * 60 * 1000;
-		long triggerAtTime = SystemClock.elapsedRealtime() + eightHour;
-		Intent i = new Intent(this, AutoUpdateReceiver.class);
-		PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
-		manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
+		
+		pref = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+		int frequence = pref.getInt("frequency", 8*60);
+		
+		//当更新频率不为0时，更新启动天气更新
+		if (frequence != 0) {
+			
+			long triggerAtTime = SystemClock.elapsedRealtime() + frequence*60*1000;
+			Intent i = new Intent(this, AutoUpdateReceiver.class);
+			PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
+			manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);	
+		}
 		return super.onStartCommand(intent, flags, startId);
 	}
 

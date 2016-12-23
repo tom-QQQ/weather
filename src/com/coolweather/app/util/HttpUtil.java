@@ -36,7 +36,6 @@ public class HttpUtil {
 						HttpResponse httpResponse = httpClient.execute(httpGet);
 						if (httpResponse.getStatusLine().getStatusCode() == 200) {
 							HttpEntity entity = httpResponse.getEntity();
-							//json文件包含中文，用GB2312
 							value = EntityUtils.toString(entity, "utf-8");
 						}						
 						//当参数类型为其他时，采用普通解析方法

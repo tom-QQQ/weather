@@ -2,12 +2,17 @@
 <resources>
 
     <string name="app_name">酷欧天气</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">天气自动更新频率</string>
     <string name="China">中国</string>
     <string name="load_lost">加载失败</string>
     <string name="loading">正在加载…</string>
     <string name="to">~</string>
     <string name="syncing">同步中…</string>
     <string name="sync_lost">同步失败</string>
+    <string name="frequency">请输入期望的更新频率，单位分钟每次</string>
+    <string name="suggestion">建议大于60,值为0时不更新</string>
+    <string name="ok">确定</string>
+    <string name="current_frequency">当前更新频率为：</string>
+    <string name="setting_succeed">设置成功</string>
 
 </resources>
